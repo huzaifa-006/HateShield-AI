@@ -1,36 +1,41 @@
-name: CI/CD Workflow
+name: HateShield CI/CD
 
 on:
   push:
-    branches: [ main ]
+    branches: [ develop ]
   pull_request:
     branches: [ main ]
 
 jobs:
-  build:
+  build-test:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: hateshield
+          POSTGRES_USER: admin
+          POSTGRES_PASSWORD: admin
+        ports:
+          - 5432:5432
 
-      - name: Set up Python
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      - name: Install backend dependencies
+      - name: Backend tests
         run: |
           cd backend
           pip install -r requirements.txt
+          python manage.py test
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-
-      - name: Build frontend
+      - name: Frontend build
         run: |
-          cd Frontend
+          cd frontend
           npm install
-          CI=false npm run build
+          npm run build

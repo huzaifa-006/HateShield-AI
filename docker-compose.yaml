@@ -1,33 +1,28 @@
 version: "3.9"
 
 services:
-  frontend:
-    build: ./frontend
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: hateshield
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
     ports:
-      - "3000:80"
-    depends_on:
-      - backend
+      - "5432:5432"
 
   backend:
     build: ./backend
     ports:
       - "8000:8000"
-    environment:
-      - DB_HOST=db
-      - DB_NAME=hatersdb
-      - DB_USER=postgres
-      - DB_PASSWORD=postgres
     depends_on:
       - db
 
-  db:
-    image: postgres:15
-    environment:
-      POSTGRES_DB: hatersdb
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    volumes:
-      - db_data:/var/lib/postgresql/data
+  ml:
+    build: ./ml-service
+    ports:
+      - "5000:5000"
 
-volumes:
-  db_data:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
