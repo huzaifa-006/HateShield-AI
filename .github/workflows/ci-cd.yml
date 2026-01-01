@@ -39,3 +39,9 @@ jobs:
           cd frontend
           npm install
           npm run build
+      
+      - name: Build Docker Image
+        run: |
+          docker build -t hateshield-backend ./backend
+          docker build -t hateshield-frontend ./frontend
+          docker build -t hateshield-ml-service ./ml-service
