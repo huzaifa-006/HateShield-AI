@@ -45,3 +45,7 @@ jobs:
           docker build -t hateshield-backend ./backend
           docker build -t hateshield-frontend ./frontend
           docker build -t hateshield-ml-service ./ml-service
+
+      - name: Install Dependencies
+        run: | 
+          pip install -r backend/requirements.txt 
