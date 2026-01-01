@@ -1,4 +1,4 @@
-    DATABASES = {
+DATABASES = {
   'default': {
     'ENGINE': 'django.db.backends.postgresql',
     'NAME': os.getenv('POSTGRES_DB'),
