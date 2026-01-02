@@ -21,7 +21,7 @@ const AboutUs = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           <div className="container">
-            <h1 className="display-4 fw-bold">About Hate Speech Detection</h1>
+            <h1 className="display-4 fw-bold">About HateShield-AI</h1>
             <p className="lead">
               Revolutionizing social media with AI-powered real-time hate speech detection and actionable insights.
             </p>
@@ -38,7 +38,7 @@ const AboutUs = () => {
           <div className="container">
             <h2 className="text-center mb-4">Who We Are</h2>
             <p className="text-center">
-              Hate Speech Detection AI is an advanced platform created to address the growing concern of online hate speech and toxicity. Using cutting-edge artificial intelligence, including natural language processing (NLP) and sentiment analysis, we aim to identify, flag, and mitigate harmful content in real-time. Our mission is to support social media platforms, online communities, and content creators in fostering a safer, more inclusive digital environment. Through accurate detection and actionable insights, we strive to reduce the impact of hate speech and promote healthier interactions online.
+              HateShield-AI is an advanced platform created to address the growing concern of online hate speech and toxicity. Using cutting-edge artificial intelligence, including natural language processing (NLP) and sentiment analysis, we aim to identify, flag, and mitigate harmful content in real-time. Our mission is to support social media platforms, online communities, and content creators in fostering a safer, more inclusive digital environment. Through accurate detection and actionable insights, we strive to reduce the impact of hate speech and promote healthier interactions online.
             </p>
            </div>
         </motion.section>
@@ -135,7 +135,7 @@ const AboutUs = () => {
           transition={{ duration: 0.5, delay: 1 }}
         >
           <div className="container">
-            <h2 className="mb-4">Join Hate Speech Detection Today!</h2>
+            <h2 className="mb-4">Join HateShield-AI Today!</h2>
             <p className="lead">Help create safer online communities with AI-powered hate speech detection.</p>
           </div>
         </motion.section>
