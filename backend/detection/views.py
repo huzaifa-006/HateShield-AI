@@ -1,7 +1,7 @@
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from detection.models import detection, DetectionFeedback
-from .utils import run_pipeline
+from detection.utils import run_pipeline
 import json
 import PyPDF2
 import docx
