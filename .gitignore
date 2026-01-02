@@ -12,5 +12,5 @@ media/
 db.sqlite3
 staticfiles/
 .DS_Store
-
 **/.DS_Store
+git-auto.sh
