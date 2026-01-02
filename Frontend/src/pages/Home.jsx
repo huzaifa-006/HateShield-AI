@@ -177,7 +177,7 @@ const Home = () => {
             >
                 <StarBackground />
                 <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-                    <h1 className="display-4 fw-bold">Welcome to Hate Speech Detection AI</h1>
+                    <h1 className="display-4 fw-bold">Welcome to HateShield-AI</h1>
                     <p className="lead">
                         Revolutionizing social media with AI-powered real-time hate speech detection and actionable insights.
                     </p>
@@ -287,7 +287,7 @@ const Home = () => {
                 transition={{ duration: 0.5, delay: 0.6 }}
             >
                 <div className="container">
-                    <h2 className="text-center mb-4">Why Choose Hate Speech Detection?</h2>
+                    <h2 className="text-center mb-4">Why Choose HateShield-AI?</h2>
                     <div className="row g-4">
                         <div className="col-md-4">
                             <div className="card h-100 text-center p-4 shadow-card">
