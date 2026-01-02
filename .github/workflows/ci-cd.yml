@@ -31,6 +31,7 @@ jobs:
       - name: Backend tests
         run: |
           cd backend
+          export PYTHONPATH=$PYTHONPATH:$(pwd)
           pip install -r requirements.txt
           python manage.py test
 
