@@ -1,4 +1,4 @@
-from .xlnet_classifier import HateSpeechDetector
+from .attention_classifier import HateSpeechDetector
 import os
 from django.conf import settings
 
