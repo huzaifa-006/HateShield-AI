@@ -74,7 +74,7 @@ const DetectionPage = () => {
   const testBackendConnection = async () => {
     try {
       setTestStatus('Testing connection...');
-      const testText = "This is a test message for hate speech detection.";
+      const testText = "This is a test message for HateShield-AI.";
       const results = await detectHateSpeech(testText);
       setTestStatus('Backend connection successful! Model is working.');
       setResult(results);
@@ -181,7 +181,7 @@ const DetectionPage = () => {
         transition={{ duration: 0.6 }}
       >
         <div className="container">
-          <h1 className="display-5 section-title">Hate Speech Detection</h1>
+          <h1 className="display-5 section-title">HateShield-AI</h1>
           <p className="lead">Enter text or upload a file to detect hate speech using our AI model.</p>
           
           {/* Backend Test Button */}

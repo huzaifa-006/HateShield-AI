@@ -42,7 +42,7 @@ const Dashboard = () => {
   const quickActions = [
     {
       title: "Detect Hate Speech",
-      description: "Analyze text or upload files for hate speech detection",
+      description: "Analyze text or upload files for HateShield-AI",
       icon: "🔍",
       link: "/detection",
       color: "primary"

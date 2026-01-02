@@ -55,7 +55,7 @@ const ContactUs = () => {
           <div className="container">
             <h1 className="display-4 fw-bold">Contact Us</h1>
             <p className="lead">
-              We'd love to hear from you! Reach out with any questions or feedback about Hate Speech Detection.
+              We'd love to hear from you! Reach out with any questions or feedback about HateShield-AI.
             </p>
           </div>
         </motion.section>
