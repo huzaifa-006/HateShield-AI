@@ -90,7 +90,7 @@ jobs:
           docker build -t myregistry/hateshield-ml:latest ml_service
       - name: Push Docker images
         run: |
-          echo "${{ secrets.DOCKER_PASS }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
+          echo "${secrets.DOCKER_PASS}" | docker login -u "${secrets.DOCKER_USER}" --password-stdin
           docker push myregistry/hateshield-backend:latest
           docker push myregistry/hateshield-ml:latest
   deploy:
