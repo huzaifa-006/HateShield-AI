@@ -19,7 +19,7 @@ services:
     build: ./ml-service
     ports:
       - "5001:5000"
-
+# FRONTEND SERVICE
   frontend:
     build: ./frontend
     ports:
