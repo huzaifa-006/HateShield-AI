@@ -6,7 +6,7 @@ services:
       POSTGRES_DB: hateshield
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
-
+# DJANGO BACKEND SERVICE
   backend:
     build: ./backend
     ports:
