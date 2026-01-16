@@ -14,7 +14,7 @@ services:
     depends_on:
       - db
       - ml
-
+# ML SERVICE
   ml:
     build: ./ml-service
     ports:
