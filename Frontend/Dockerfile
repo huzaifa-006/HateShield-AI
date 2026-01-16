@@ -11,5 +11,7 @@ COPY . .
 # Build the application
 RUN npm run build
 
+# Use Nginx to serve the built application
 FROM nginx:alpine
+# Copy the built application to Nginx's web root
 COPY --from=build /app/build /usr/share/nginx/html
