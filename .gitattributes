@@ -1,0 +1,5 @@
+backend/static/models/xlnet_hate_speech_model.safetensors filter=lfs diff=lfs merge=lfs -text
+backend/static/models/*.safetensors filter=lfs diff=lfs merge=lfs -text
+backend/Archive.zip filter=lfs diff=lfs merge=lfs -text
+backend/torch_env/lib/python3.10/site-packages/torch/lib/*.dylib filter=lfs diff=lfs merge=lfs -text
+backend/safeenv/lib/python3.10/site-packages/torch/lib/*.dylib filter=lfs diff=lfs merge=lfs -text
