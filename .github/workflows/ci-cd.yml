@@ -1,0 +1,110 @@
+# name: HateShield CI/CD
+# on:
+#   push:
+#     branches: [ develop ]
+#   pull_request:
+#     branches: [ main ]
+
+# jobs:
+#   build-test:
+#     runs-on: ubuntu-latest
+
+#     services:
+#       postgres:
+#         image: postgres:15
+#         env:
+#           POSTGRES_DB: hateshield
+#           POSTGRES_USER: admin
+#           POSTGRES_PASSWORD: admin
+#         ports:
+#           - 5432:5432
+
+#     steps:
+#       - uses: actions/checkout@v4
+
+#       - name: Setup Python
+#         uses: actions/setup-python@v5
+#         with:
+#           python-version: '3.10'
+
+#       - name: Backend tests
+#         run: |
+#           cd backend
+#           export PYTHONPATH=$PYTHONPATH:$(pwd)
+#           pip install -r requirements.txt
+#           python manage.py test
+
+#       - name: Frontend build
+#         run: |
+#           cd frontend
+#           npm install
+#           npm run build
+      
+#       - name: Build Docker Image
+#         run: |
+#           docker build -t hateshield-backend ./backend
+#           docker build -t hateshield-frontend ./frontend
+#           docker build -t hateshield-ml-service ./ml-service
+
+#       - name: Install Dependencies
+#         run: | 
+#           pip install -r backend/requirements.txt 
+
+name: CI-CD Pipeline
+on: [push, pull_request]
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with: { node-version: '18.x' }
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm ci
+      - name: Build frontend
+        run: npm run build
+      - name: Upload frontend artifact
+        uses: actions/upload-artifact@v4
+        with: { name: frontend-build, path: frontend/build }
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with: { python-version: '3.13' }
+      - name: Install backend dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r backend/requirements.txt
+      - name: Run backend tests
+        run: |
+          pip install pytest
+          pytest backend/tests/
+      - name: Build Docker images
+        run: |
+          docker build -t myregistry/hateshield-backend:latest backend
+          docker build -t myregistry/hateshield-ml:latest ml_service
+      - name: Push Docker images
+        run: |
+          echo "${secrets.DOCKER_PASS}" | docker login -u "${secrets.DOCKER_USER}" --password-stdin
+          docker push myregistry/hateshield-backend:latest
+          docker push myregistry/hateshield-ml:latest
+  deploy:
+    needs: [frontend, backend]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Download frontend build
+        uses: actions/download-artifact@v4
+        with: { name: frontend-build, path: frontend/build }
+      - name: Configure kubectl
+        uses: azure/setup-kubectl@v3
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl apply -f k8s/manifests/
+
+          
