@@ -1,0 +1,27 @@
+
+services:
+# DATABASE SERVICE
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: hateshield
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+# DJANGO BACKEND SERVICE
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - ml
+# ML SERVICE
+  ml:
+    build: ./ml-service
+    ports:
+      - "5001:5000"
+# FRONTEND SERVICE
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
