@@ -1,0 +1,79 @@
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Hate Speech Detection</h3>
+                </div>
+                <div class="card-body">
+                    <form id="hateSpeechForm" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="text">Enter Text:</label>
+                            <textarea class="form-control" id="text" name="text" rows="4" required></textarea>
+                        </div>
+                        <div class="text-center mt-3">
+                            <button type="submit" class="btn btn-primary">Analyze</button>
+                        </div>
+                    </form>
+                    
+                    <div id="results" class="mt-4" style="display: none;">
+                        <h4>Results:</h4>
+                        <div class="card">
+                            <div class="card-body">
+                                <p><strong>Original Text:</strong> <span id="originalText"></span></p>
+                                <p><strong>Preprocessed Text:</strong> <span id="preprocessedText"></span></p>
+                                <p><strong>Prediction:</strong> <span id="prediction" class="badge"></span></p>
+                                <p><strong>Confidence:</strong> <span id="probability"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('hateSpeechForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    
+    fetch('', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+            return;
+        }
+        
+        const results = data.results;
+        document.getElementById('originalText').textContent = results.original_text;
+        document.getElementById('preprocessedText').textContent = results.preprocessed_text;
+        document.getElementById('prediction').textContent = results.prediction;
+        document.getElementById('probability').textContent = (results.probability * 100).toFixed(2) + '%';
+        
+        // Set badge color based on prediction
+        const predictionBadge = document.getElementById('prediction');
+        if (results.prediction === 'Hate Speech') {
+            predictionBadge.className = 'badge bg-danger';
+        } else {
+            predictionBadge.className = 'badge bg-success';
+        }
+        
+        document.getElementById('results').style.display = 'block';
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while processing your request.');
+    });
+});
+</script>
