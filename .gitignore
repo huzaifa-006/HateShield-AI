@@ -1,21 +1,43 @@
+# Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-*.safetensors
+*.egg-info/
+venv/
+safeenv/
+torch_env/
+
+# Env & secrets
 .env
+*.pem
+*.tfvars
+
+# Model artifacts (don't commit raw weights — we'll handle these via S3 later)
+*.pt
+*.pth
+*.bin
+*.safetensors
+
+# Node / React
 node_modules/
 build/
 dist/
-*.log
+
+# Django
 media/
 db.sqlite3
 staticfiles/
+
+# Terraform (we'll need this from Phase 3 onward)
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+# Misc
+*.log
 .DS_Store
 **/.DS_Store
 git-auto.sh
 .vscode/
-.safeenv/
 *.idea/
-*.torchenv/
-.DS_Store
